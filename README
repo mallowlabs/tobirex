@@ -1,1 +1,10 @@
 Under consturction
+
+## install ##
+1. gem sources -a http://gems.github.com
+2. gem install aaronp-frex
+3. gem install tobirex
+
+## usage ##
+$ tobirex < target.js
+
