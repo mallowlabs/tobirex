@@ -17,6 +17,18 @@ class TobirexParserTest < Test::Unit::TestCase
     end
     assert i == 8
   end
+
+  def test_xml
+    @parser.parse <<EOF
+var i = 1;
+var str = "";
+for (i = 0; i < 10; i++) {
+    str += "<hoge>";
+}
+document.write(str);
+EOF
+    @parser.print
+  end
  
   def teardown
   end
