@@ -3,8 +3,19 @@ Under consturction
 ## install ##
 1. gem sources -a http://gems.github.com
 2. gem install aaronp-frex
-3. gem install tobirex
+3. gem install mallowlabs-tobirex
 
 ## usage ##
 $ tobirex < target.js
+or
+$ tobirex target.js
+
+## example ##
+$ cat test.js
+var i = 0;
+
+$ tobirex test.js
+<?xml version="1.0"?><tokens><kw>var</kw><sp> </sp><ident>i</ident><sp> </sp><op>=</op><sp> </sp><literal>0</literal><semi>;</semi><nl>
+</nl><nl>
+</nl></tokens>
 
