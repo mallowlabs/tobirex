@@ -1,5 +1,5 @@
 #
-# frex javascript.rex
+# $ frex javascript.rex
 #
 class JavaScriptTokenizer
 inner
@@ -9,10 +9,10 @@ inner
     @offset - text.size
   end
 
-  def is_keyword(text)
-    keywords = %w[abstract boolean break byte case catch char class comment const continue debugger default delete dodouble else enum export extends false final finally float for function goto if implements importin instanceof int interface label long native new null package private protected public return shortstatic super switch synchronized this throw throws transient true try typeof var void volatile while with]
+  KEYWORDS = %w[abstract boolean break byte case catch char class comment const continue debugger default delete dodouble else enum export extends false final finally float for function goto if implements importin instanceof int interface label long native new null package private protected public return shortstatic super switch synchronized this throw throws transient true try typeof var void volatile while with]
 
-    if keywords.index(text)
+  def is_keyword(text)
+    if KEYWORDS.index(text)
       :kw
     else
       :ident
@@ -25,7 +25,7 @@ inner
     end
     nil
   end
-    
+
 macro
   slash           \/
   star            \*
@@ -51,9 +51,9 @@ rule
   [0-9]+                     { [:literal, text, lineno, update(text)] }
   \/((\\[^\n\r])|[^\n\r\*\\\/])((\\[^\n\r])|[^\n\r\\\/])*\/[gimy]* { [:regexp, text, lineno, update(text)] }
   {operator}                 { [:op, text, lineno, update(text)] }
-#  [\(\)]                     { [:paren, text, lineno, update(text)] }
-  [\{\}]                     { [:brace, text, lineno, update(text)] }
-  ;                          { [:semi, text, lineno, update(text)] }
+#  [\(\)]                     { [:op, text, lineno, update(text)] }
+  [\{\}]                     { [:op, text, lineno, update(text)] }
+  ;                          { [:op, text, lineno, update(text)] }
   .                          { [:punct, text, lineno, update(text)] }
 
 end
