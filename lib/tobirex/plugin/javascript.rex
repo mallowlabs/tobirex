@@ -45,11 +45,11 @@ rule
   [\s]+                      { [:sp, text, lineno, update(text)] }
   \/\/.*                     { [:comment, text, lineno, update(text)] }
   {comment}                  { [:comment, text, lineno, update(text)] }
-  \"([^\\\"]|\\.)*\"         { [:string, text, lineno, update(text)] }
-  \'([^\\\']|\\.)*\'         { [:string, text, lineno, update(text)] }
+  \"([^\\\"]|\\.)*\"         { [:literal, text, lineno, update(text)] }
+  \'([^\\\']|\\.)*\'         { [:literal, text, lineno, update(text)] }
   [A-Za-z_$][0-9A-Za-z_]*     { [is_keyword(text), text, lineno, update(text)] }
   [0-9]+                     { [:literal, text, lineno, update(text)] }
-  \/((\\[^\n\r])|[^\n\r\*\\\/])((\\[^\n\r])|[^\n\r\\\/])*\/[gimy]* { [:regexp, text, lineno, update(text)] }
+  \/((\\[^\n\r])|[^\n\r\*\\\/])((\\[^\n\r])|[^\n\r\\\/])*\/[gimy]* { [:literal, text, lineno, update(text)] }
   {operator}                 { [:op, text, lineno, update(text)] }
 #  [\(\)]                     { [:op, text, lineno, update(text)] }
   [\{\}]                     { [:op, text, lineno, update(text)] }

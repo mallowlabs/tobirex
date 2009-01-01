@@ -68,10 +68,10 @@ class JavaScriptTokenizer < Racc::Parser
            @rex_tokens.push action { [:comment, text, lineno, update(text)] }
 
         when (text = ss.scan(/\"([^\\\"]|\\.)*\"/))
-           @rex_tokens.push action { [:string, text, lineno, update(text)] }
+           @rex_tokens.push action { [:literal, text, lineno, update(text)] }
 
         when (text = ss.scan(/\'([^\\\']|\\.)*\'/))
-           @rex_tokens.push action { [:string, text, lineno, update(text)] }
+           @rex_tokens.push action { [:literal, text, lineno, update(text)] }
 
         when (text = ss.scan(/[A-Za-z_$][0-9A-Za-z_]*/))
            @rex_tokens.push action { [is_keyword(text), text, lineno, update(text)] }
@@ -80,7 +80,7 @@ class JavaScriptTokenizer < Racc::Parser
            @rex_tokens.push action { [:literal, text, lineno, update(text)] }
 
         when (text = ss.scan(/\/((\\[^\n\r])|[^\n\r\*\\\/])((\\[^\n\r])|[^\n\r\\\/])*\/[gimy]*/))
-           @rex_tokens.push action { [:regexp, text, lineno, update(text)] }
+           @rex_tokens.push action { [:literal, text, lineno, update(text)] }
 
         when (text = ss.scan(/(\.|\[|\]|\(|\)|\+\+|--|>>>=|>>>|<<=|>>=|<<|>>|<=|<|>=|>|===|!==|==|!=|!|\^|&&|\|\||\||\?|:|=|\*=|\/=|%=|\+=|&=|-|~|\*|\/|%|\+|&|\^=|\|=|,)/))
            @rex_tokens.push action { [:op, text, lineno, update(text)] }
