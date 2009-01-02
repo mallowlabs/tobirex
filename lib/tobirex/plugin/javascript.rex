@@ -49,9 +49,10 @@ rule
   \'([^\\\']|\\.)*\'         { [:literal, text, lineno, update(text)] }
   [A-Za-z_$][0-9A-Za-z_]*     { [is_keyword(text), text, lineno, update(text)] }
   [0-9]+                     { [:literal, text, lineno, update(text)] }
-  \/((\\[^\n\r])|[^\n\r\*\\\/])((\\[^\n\r])|[^\n\r\\\/])*\/[gimy]* { [:literal, text, lineno, update(text)] }
+  \/((\\[^\n\r])|[^\n\r\*\\\/])((\\[^\n\r])|[^\n\r\\\/])*\/[gimy]* {
+                               [:literal, text, lineno, update(text)]
+                             }
   {operator}                 { [:op, text, lineno, update(text)] }
-#  [\(\)]                     { [:op, text, lineno, update(text)] }
   [\{\}]                     { [:op, text, lineno, update(text)] }
   ;                          { [:op, text, lineno, update(text)] }
   .                          { [:punct, text, lineno, update(text)] }

@@ -80,7 +80,10 @@ class JavaScriptTokenizer < Racc::Parser
            @rex_tokens.push action { [:literal, text, lineno, update(text)] }
 
         when (text = ss.scan(/\/((\\[^\n\r])|[^\n\r\*\\\/])((\\[^\n\r])|[^\n\r\\\/])*\/[gimy]*/))
-           @rex_tokens.push action { [:literal, text, lineno, update(text)] }
+           @rex_tokens.push action {
+                               [:literal, text, lineno, update(text)]
+                             }
+
 
         when (text = ss.scan(/(\.|\[|\]|\(|\)|\+\+|--|>>>=|>>>|<<=|>>=|<<|>>|<=|<|>=|>|===|!==|==|!=|!|\^|&&|\|\||\||\?|:|=|\*=|\/=|%=|\+=|&=|-|~|\*|\/|%|\+|&|\^=|\|=|,)/))
            @rex_tokens.push action { [:op, text, lineno, update(text)] }
