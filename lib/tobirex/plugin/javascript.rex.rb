@@ -76,7 +76,7 @@ class JavaScriptTokenizer < Racc::Parser
         when (text = ss.scan(/[A-Za-z_$][0-9A-Za-z_]*/))
            @rex_tokens.push action { [is_keyword(text), text, lineno, update(text)] }
 
-        when (text = ss.scan(/[0-9]+/))
+        when (text = ss.scan(/(\-)?[0-9]+(\.[0-9]+)?/))
            @rex_tokens.push action { [:literal, text, lineno, update(text)] }
 
         when (text = ss.scan(/\/((\\[^\n\r])|[^\n\r\*\\\/])((\\[^\n\r])|[^\n\r\\\/])*\/[gimy]*/))
@@ -113,7 +113,7 @@ class JavaScriptTokenizer < Racc::Parser
     @offset += text.size
     @offset - text.size
   end
-  KEYWORDS = %w[abstract boolean break byte case catch char class comment const continue debugger default delete dodouble else enum export extends false final finally float for function goto if implements importin instanceof int interface label long native new null package private protected public return shortstatic super switch synchronized this throw throws transient true try typeof var void volatile while with]
+  KEYWORDS = %w[abstract boolean break byte case catch char class comment const continue debugger default delete dodouble else enum export extends false final finally float for function goto if implements importin instanceof int interface label long native new null package private protected public return short static super switch synchronized this throw throws transient true try typeof var void volatile while with]
   def is_keyword(text)
     if KEYWORDS.index(text)
       :kw
