@@ -1,4 +1,8 @@
-Under consturction
+## about ##
+Tobirex is a javascript lexer.
+It outputs results of analysis as XML format.
+It leaves whitespaces on results,
+so you can convert XML outputs to the original source code.
 
 ## install ##
 1. gem sources -a http://gems.github.com
@@ -15,7 +19,7 @@ $ cat test.js
 var i = 0;
 
 $ tobirex test.js
-<?xml version="1.0"?><tokens><kw>var</kw><sp> </sp><ident>i</ident><sp> </sp><op>=</op><sp> </sp><literal>0</literal><semi>;</semi><nl>
+<?xml version="1.0"?><tokens><kw>var</kw><sp> </sp><ident>i</ident><sp> </sp><op>=</op><sp> </sp><literal>0</literal><op>;</op><nl>
 </nl><nl>
 </nl></tokens>
 
